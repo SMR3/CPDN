@@ -30,7 +30,6 @@ echo "File directory" $dir_path
 # Load modules
   
 module load cdo
-module load nco
 module load netcdf
 
 # Create list of input files:
