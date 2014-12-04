@@ -125,4 +125,4 @@ SICE:
 | no. longitude | 192 (0 to 358.125) |
 | no. latitude | 145 (90 to –90) |
 | SST units | SURFACE TEMPERATURE AFTER TIMESTEP (K) |
-| SICE units | SEA ICE FRACTION AFTER TIMESTEP (0--1) |
+| SICE units | SEA ICE FRACTION AFTER TIMESTEP (0—1) |
