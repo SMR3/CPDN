@@ -15,7 +15,7 @@ Author: Mitchell Black (mtblack@student.unimelb.edu.au)
 
 > **Code**: [regrid_OSTIA_N96.sh](https://github.com/MitchellBlack/CPDN/blob/master/regrid_OSTIA_N96.sh)
 >
-> **Operation**: *bash regrid_OSTIA_N96.sh {year_of_files_to_regrid} {path_to_directory_containing_files}*
+> **Operation**: `bash regrid_OSTIA_N96.sh {year_of_files_to_regrid} {path_to_directory_containing_files}`
 >
 > **Required software modules**: [cdo](https://code.zmaw.de/projects/cdo), [netcdf](http://www.unidata.ucar.edu/software/netcdf/)
 >
@@ -39,7 +39,7 @@ SICE:
 
 > **Code**: [calc_5daymean_OSTIA.sh](https://github.com/MitchellBlack/CPDN/blob/master/calc_5daymean_OSTIA.sh)
 >
-> **Operation**: *bash calc_5daymean_OSTIA.sh {infile}  {year} {field: SST or SICE }*
+> **Operation**: `bash calc_5daymean_OSTIA.sh {infile}  {year} {field: SST or SICE }`
 >
 > **Required software modules**: [cdo](https://code.zmaw.de/projects/cdo)
 >
