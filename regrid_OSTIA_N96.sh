@@ -30,6 +30,7 @@ echo "File directory" $dir_path
 # Load modules
   
 module load cdo
+module load nco
 module load netcdf
 
 # Create list of input files:
@@ -47,10 +48,14 @@ for i in $file_list
      # files >2006 are HDF5, so convert to classic netcdf for use in cdo:
 
      nccopy -k classic ${i} classic.nc
+    
+     # unpack netcdf files:
      
-     cdo -remapbil,r192x145 -selvar,analysed_sst classic.nc SST_N96_${counter}.nc
-     cdo -remapbil,r192x145 -selvar,sea_ice_fraction classic.nc SICE_N96_${counter}.nc
-     rm classic.nc  
+     ncpdq -U classic.nc unpacked.nc
+     
+     cdo -remapbil,r192x145 -selvar,analysed_sst unpacked.nc SST_N96_${counter}.nc
+     cdo -remapbil,r192x145 -selvar,sea_ice_fraction unpacked.nc SICE_N96_${counter}.nc
+     rm classic.nc unpacked.nc
 
      counter=$((counter+1))
   done     
