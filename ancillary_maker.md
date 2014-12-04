@@ -116,3 +116,13 @@ SICE:
 >
 > **Output**: sice_ancil, sst_ancil
 
+#### 8. Check ancillary files
+
+| Unit   | Check | 
+| :----- | :----- |
+| no. time steps | 78 (starting YYYY/12/03:12.00) | 
+| no. time steps | 6 time steps per month |
+| no. longitude | 192 (0 to 358.125) |
+| no. latitude | 145 (90 to –90) |
+| SST units | SURFACE TEMPERATURE AFTER TIMESTEP (K) |
+| SICE units | SEA ICE FRACTION AFTER TIMESTEP (0--1) |
