@@ -99,11 +99,11 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 
 	HadAM3P land-sea mask: [lsm_n96_add.nc](https://www.dropbox.com/s/j1dgrxdny0jhfmd/lsm_n96_add.nc?dl=0)
 
-SICE:
+	SICE:
 
-`cdo -add lsm_n96_add.nc -invertlat OSTIA_SICE_N96_natural_interp_land.nc OSTIA_SICE_N96_natural_landmask.nc`
+	`cdo -add lsm_n96_add.nc -invertlat OSTIA_SICE_N96_natural_interp_land.nc OSTIA_SICE_N96_natural_landmask.nc`
 
-	Final SICE file (before conversion to ancil format): [OSTIA_SICE_N96_natural_landmask.nc](https://www.dropbox.com/s/ia4uo1w5cu3qgm0/OSTIA_SICE_N96_natural_landmask.nc?dl=0)
+	>Final SICE file (before conversion to ancil format): [OSTIA_SICE_N96_natural_landmask.nc](https://www.dropbox.com/s/ia4uo1w5cu3qgm0/OSTIA_SICE_N96_natural_landmask.nc?dl=0)
 
 
 ###3. Calculate natural SST fields
