@@ -89,11 +89,11 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 
 	`ncl ncl_interp_OSTIA_SICE_overland.ncl`
 
-	> **Code**: [ncl_interp_OSTIA_SICE_overland.ncl](https://github.com/MitchellBlack/CPDN/blob/master/ncl_interp_OSTIA_SICE_overland.ncl)
-	>
-	> **Operation**: change input and output name in scripts
-	>
-	> **Output**: OSTIA_SICE_N96_natural_interp_land.nc
+	>  **Code**: [ncl_interp_OSTIA_SICE_overland.ncl](https://github.com/MitchellBlack/CPDN/blob/master/ncl_interp_OSTIA_SICE_overland.ncl)
+	> 
+	>  **Operation**: change input and output name in scripts
+	> 
+	>  **Output**: OSTIA_SICE_N96_natural_interp_land.nc
 
 5. Adapt land sea mask of HadAM3P model
 
