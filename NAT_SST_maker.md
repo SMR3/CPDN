@@ -77,27 +77,27 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 
 3. Combine NH sea ice field  (1987-1988) with SH sea ice field  (2013-2014):
 
-> `cdo setclonlatbox,0.,0.,360.,-90.,-1. OSTIA_SICE_N96_1987_12_1988_12.nc OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc`
->
-> `cdo setclonlatbox,0.,0.,360.,1.,90. OSTIA_SICE_N96_2013_12_2014_12.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc`
->
-> *Go to +-1, rather than zero, so that land mask at equator is maintained*
->
-> `cdo add OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc  OSTIA_SICE_N96_natural.nc`
+	> `cdo setclonlatbox,0.,0.,360.,-90.,-1. OSTIA_SICE_N96_1987_12_1988_12.nc OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc`
+	>
+	> `cdo setclonlatbox,0.,0.,360.,1.,90. OSTIA_SICE_N96_2013_12_2014_12.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc`
+	>
+	> *Go to +-1, rather than zero, so that land mask at equator is maintained*
+	>
+	> `cdo add OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc  OSTIA_SICE_N96_natural.nc`
 
 4. Interpolate SICE fields over land
 
 `ncl ncl_interp_OSTIA_SICE_overland.ncl`
 
-> **Code**: [ncl_interp_OSTIA_SICE_overland.ncl](https://github.com/MitchellBlack/CPDN/blob/master/ncl_interp_OSTIA_SICE_overland.ncl)
->
-> **Operation**: change input and output name in scripts
->
-> **Output**: OSTIA_SICE_N96_natural_interp_land.nc
+	> **Code**: [ncl_interp_OSTIA_SICE_overland.ncl](https://github.com/MitchellBlack/CPDN/blob/master/ncl_interp_OSTIA_SICE_overland.ncl)
+	>
+	> **Operation**: change input and output name in scripts
+	>
+	> **Output**: OSTIA_SICE_N96_natural_interp_land.nc
 
 5. Adapt land sea mask of HadAM3P model
 
-HadAM3P land-sea mask: [lsm_n96_add.nc](https://www.dropbox.com/s/j1dgrxdny0jhfmd/lsm_n96_add.nc?dl=0)
+	HadAM3P land-sea mask: [lsm_n96_add.nc](https://www.dropbox.com/s/j1dgrxdny0jhfmd/lsm_n96_add.nc?dl=0)
 
 SICE:
 
@@ -125,8 +125,9 @@ Final SICE file (before conversion to ancil format): [OSTIA_SICE_N96_natural_lan
 > **Output**: deltaSST_CCSM4_N96.nc
 >
 > ...repeat for each CMIP model. These working files are archived on MITCHDATA for future reference. Use cdo ensmean to calculate MMM.
+>
+> **Smoothed delta-SST files:** [download link](https://www.dropbox.com/s/yaw5ifvogiydeac/WAH_deltaSST.dir.zip?dl=0).
 
-Smoothed delta-SST files: [download link](https://www.dropbox.com/s/yaw5ifvogiydeac/WAH_deltaSST.dir.zip?dl=0).
 
 
 
