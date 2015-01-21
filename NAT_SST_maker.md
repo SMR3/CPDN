@@ -97,36 +97,35 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 
 5. Adapt land sea mask of HadAM3P model
 
-	HadAM3P land-sea mask: [lsm_n96_add.nc](https://www.dropbox.com/s/j1dgrxdny0jhfmd/lsm_n96_add.nc?dl=0)
-
-	SICE:
-
-	`cdo -add lsm_n96_add.nc -invertlat OSTIA_SICE_N96_natural_interp_land.nc OSTIA_SICE_N96_natural_landmask.nc`
-
-	>Final SICE file (before conversion to ancil format): [OSTIA_SICE_N96_natural_landmask.nc](https://www.dropbox.com/s/ia4uo1w5cu3qgm0/OSTIA_SICE_N96_natural_landmask.nc?dl=0)
-
+	> HadAM3P land-sea mask: [lsm_n96_add.nc](https://www.dropbox.com/s/j1dgrxdny0jhfmd/lsm_n96_add.nc?dl=0)
+	> 
+	> SICE:
+	>
+	> `cdo -add lsm_n96_add.nc -invertlat OSTIA_SICE_N96_natural_interp_land.nc OSTIA_SICE_N96_natural_landmask.nc`
+	> 
+	> Final SICE file (before conversion to ancil format): [OSTIA_SICE_N96_natural_landmask.nc](https://www.dropbox.com/s/ia4uo1w5cu3qgm0/OSTIA_SICE_N96_natural_landmask.nc?dl=0)
 
 ###3. Calculate natural SST fields
 
 1. Amend delta-SST fields to take into consideration sea ice location:
 
-> This step uses the script [calc_deltaSST_SICE.py](https://github.com/MitchellBlack/PhD_Code/blob/ffac7015328eae07e154d587769b4cae55674d91/data_processing.dir/calc_deltaSST_SICE.py) and the file [lsm_n96.nc](https://www.dropbox.com/s/9idyh1yiljhzg05/lsm_n96.nc?dl=0).
-> 
-> **Execution:** `python calc_deltaSST_SICE.py {CMIP_deltaSST} {CMIP_sice_HIST} {CMIP_sice_HISTNAT} {OSTIA_sice_OBS} {CMIP_modelname} {landmask}` [-h for help string]
-> 
-> *The OSTIA sice file must be the monthly average field: `cdo monmean {in: sice_daily} {out: sice_monthly}`*
->
-> `cdo monmean OSTIA_SICE_N96_natural_landmask.nc OSTIA_SICE_N96_natural_landmask_monmean.nc`
->
-> Calculate smoothed delta-SST field:
-> 
-> `python ~/Documents/University.dir/PhD.dir/Code.dir/data_processing.dir/calc_deltaSST_SICE.py tos_Omon_CCSM4_deltaSST_1996-2005_N96.nc sic_OImon_CCSM4_historical_ensmean_monmean_1996-2005_N96.nc sic_OImon_CCSM4_historicalNat_ensmean_monmean_1996-2005_N96.nc ../OSTIA_SICE_N96_natural_landmask_monmean.nc CCSM4_ ../lsm_n96.nc`
->
-> **Output**: deltaSST_CCSM4_N96.nc
->
-> ...repeat for each CMIP model. These working files are archived on MITCHDATA for future reference. Use cdo ensmean to calculate MMM.
->
-> **Smoothed delta-SST files:** [download link](https://www.dropbox.com/s/yaw5ifvogiydeac/WAH_deltaSST.dir.zip?dl=0).
+	> This step uses the script [calc_deltaSST_SICE.py](https://github.com/MitchellBlack/PhD_Code/blob/ffac7015328eae07e154d587769b4cae55674d91/data_processing.dir/calc_deltaSST_SICE.py) and the file [lsm_n96.nc](https://www.dropbox.com/s/9idyh1yiljhzg05/lsm_n96.nc?dl=0).
+	> 
+	> **Execution:** `python calc_deltaSST_SICE.py {CMIP_deltaSST} {CMIP_sice_HIST} {CMIP_sice_HISTNAT} {OSTIA_sice_OBS} {CMIP_modelname} {landmask}` [-h for help string]
+	> 
+	> *The OSTIA sice file must be the monthly average field: `cdo monmean {in: sice_daily} {out: sice_monthly}`*
+	>
+	> `cdo monmean OSTIA_SICE_N96_natural_landmask.nc OSTIA_SICE_N96_natural_landmask_monmean.nc`
+	>
+	> Calculate smoothed delta-SST field:
+	> 
+	> `python ~/Documents/University.dir/PhD.dir/Code.dir/data_processing.dir/calc_deltaSST_SICE.py tos_Omon_CCSM4_deltaSST_1996-2005_N96.nc sic_OImon_CCSM4_historical_ensmean_monmean_1996-2005_N96.nc sic_OImon_CCSM4_historicalNat_ensmean_monmean_1996-2005_N96.nc ../OSTIA_SICE_N96_natural_landmask_monmean.nc CCSM4_ ../lsm_n96.nc`
+	>
+	> **Output**: deltaSST_CCSM4_N96.nc
+	>
+	> ...repeat for each CMIP model. These working files are archived on MITCHDATA for future reference. Use cdo ensmean to calculate MMM.
+	>
+	> **Smoothed delta-SST files:** [download link](https://www.dropbox.com/s/yaw5ifvogiydeac/WAH_deltaSST.dir.zip?dl=0).
 
 
 
