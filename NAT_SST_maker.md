@@ -55,35 +55,29 @@ List of files used for calculating delta-SSTs: [wah_deltaSST_infiles.csv](https:
 
 ###2. Generate natural sea ice file
 
-I will use Dec 1987-- Nov 1988 for NH sea ice extent as this time had the maximum extent in observations [see link here](http://nsidc.org/arcticseaicenews/files/2014/03/Figure3.png) [and here](http://nsidc.org/arcticseaicenews/files/2014/10/monthly_ice_NH_09.png).
+I will use Dec 1986-- Nov 19878 for NH sea ice extent as this time had the maximum extent in observations [see link here](http://nsidc.org/arcticseaicenews/files/2014/03/Figure3.png) [and here](http://nsidc.org/arcticseaicenews/files/2014/10/monthly_ice_NH_09.png). 1987-1988 OSTIA SICE had problems - some time steps were the same as previous.
 
 I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maximum extent in observations [see link here](http://arctic.atmos.uiuc.edu/cryosphere/antarctic.sea.ice.interactive.html). 
 
 1. Calculate 5-day average OSTIA SICE:
 
-	> e.g., `bash ~/Documents/University.dir/PhD.dir/CPDN.dir/calc_5daymean_OSTIA.sh /Users/mtblack/Documents/University.dir/PhD.dir/Data.dir/OSTIA.dir/OSTIA_SICE_1985_01-2014_11_N96_daily.nc 1987 SICE`
+	> e.g., `bash ~/Documents/University.dir/PhD.dir/CPDN.dir/calc_5daymean_OSTIA.sh /Users/mtblack/Documents/University.dir/PhD.dir/Data.dir/OSTIA.dir/OSTIA_SICE_1985-2014_N96_daily.nc 1986 SICE` (repeat for 1987, 2013, 2014)
 
 2. Select time steps for model year:
 
-	> `cdo mergetime -selmon,12 OSTIA_SST_N96_2013_5daymean.nc -selmon,1,2,3,4,5,6,7,8,9,10,11,12 OSTIA_SST_N96_2014_5daymean.nc OSTIA_SST_N96_2013_12_2014_12.nc`
+	> `cdo mergetime -selmon,12 OSTIA_SICE_N96_1986_5daymean.nc -selmon,1,2,3,4,5,6,7,8,9,10,11,12 OSTIA_SICE_N96_1987_5daymean.nc OSTIA_SICE_N96_1986_12-1987_12_5daymean.nc`
 
-	> `cdo mergetime -selmon,12 OSTIA_SICE_N96_2013_5daymean.nc -selmon,1,2,3,4,5,6,7,8,9,10,11 OSTIA_SICE_N96_2014_5daymean.nc OSTIA_SICE_N96_2013_12_2014_11.nc`
+	> `cdo mergetime -selmon,12 OSTIA_SICE_N96_2013_5daymean.nc -selmon,1,2,3,4,5,6,7,8,9,10,11,12 OSTIA_SICE_N96_2014_5daymean.nc OSTIA_SICE_N96_2013_12-2014_12_5daymean.nc`
 	
-	> Dec 2014 not available, so repeat Dec 2013 and append to end of file:
-	>
-	> `cdo selmon,12 OSTIA_SICE_N96_2013_5daymean.nc OSTIA_SICE_N96_2014_12.nc`
-	>
-	> `cdo cat OSTIA_SICE_N96_2013_12_2014_11.nc OSTIA_SICE_N96_2014_12.nc OSTIA_SICE_N96_2013_12_2014_12.nc`
+3. Combine NH sea ice field  (1986-1987) with SH sea ice field  (2013-2014):
 
-3. Combine NH sea ice field  (1987-1988) with SH sea ice field  (2013-2014):
-
-	> `cdo setclonlatbox,0.,0.,360.,-90.,-1. OSTIA_SICE_N96_1987_12_1988_12.nc OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc`
+	> `cdo setclonlatbox,0.,0.,360.,-90.,-1. OSTIA_SICE_N96_1986_12-1987_12_5daymean.nc OSTIA_SICE_N96_1986_12_1987_12_SH_zero.nc`
 	>
-	> `cdo setclonlatbox,0.,0.,360.,1.,90. OSTIA_SICE_N96_2013_12_2014_12.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc`
+	> `cdo setclonlatbox,0.,0.,360.,1.,90. OSTIA_SICE_N96_2013_12-2014_12_5daymean.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc`
 	>
 	> *Go to +-1, rather than zero, so that land mask at equator is maintained*
 	>
-	> `cdo add OSTIA_SICE_N96_1987_12_1988_12_SH_zero.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc  OSTIA_SICE_N96_natural.nc`
+	> `cdo add OSTIA_SICE_N96_1986_12_1987_12_SH_zero.nc OSTIA_SICE_N96_2013_12_2014_12_NH_zero.nc  OSTIA_SICE_N96_natural.nc`
 
 4. Interpolate SICE fields over land
 
@@ -127,7 +121,27 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 	>
 	> **Smoothed delta-SST files:** [download link](https://www.dropbox.com/s/yaw5ifvogiydeac/WAH_deltaSST.dir.zip?dl=0).
 
+2. Subtract delta-SST from observed SSTs
 
+	> I have created a script to calculate the natural SSTs and convert to the W@H ancillary format.
+	>
+	> Code: [calc_natSST.py](https://github.com/MitchellBlack/PhD_Code/blob/1f28de20472986f3b3fcbe5e14deb61c937e6271/data_processing.dir/calc_natSST.py), file: [lsm_n96.nc](https://www.dropbox.com/s/xcedlrwozuyjhxv/lsm_n96.nc?dl=0)
+	>
+	> Rename the final SICE file (*OSTIA_SICE_N96_natural_landmask.nc*) to *final_OSTIA_SST_natural.nc*.
+	> 
+	> Operation: `python ~/Documents/University.dir/PhD.dir/Code.dir/data_processing.dir/calc_natSST.py -h`
+	>
+	> `python ~/Documents/University.dir/PhD.dir/Code.dir/data_processing.dir/calc_natSST.py final_OSTIA_SST_2014.nc deltaSST_CCSM4_N96.nc final_OSTIA_SICE_natural.nc lsm_n96.nc CCSM4 2013`, repeat for each delta-SST
 
+	> Final ancil files, 2014 NAT experiment: [download link](https://www.dropbox.com/s/zds1uoqjg08ppyv/2014_NAT_ancils.dir.zip?dl=0) (all files on MITCHDATA).
 
+3. Check ancillary files
 
+	| Unit   | Check | 
+	| :----- | :----- |
+	| no. time steps | 78 (starting YYYY/12/03:12.00) | 
+	| no. time steps | 6 time steps per month |
+	| no. longitude | 192 (0 to 358.125) |
+	| no. latitude | 145 (90 to –90) |
+	| SST units | SURFACE TEMPERATURE AFTER TIMESTEP (K) |
+	| SICE units | SEA ICE FRACTION AFTER TIMESTEP (0—1) |
