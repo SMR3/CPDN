@@ -127,7 +127,7 @@ I will use Dec 2013 -- Nov 2014 for SH sea ice extent as this time had the maxim
 	>
 	> Code: [calc_natSST.py](https://github.com/MitchellBlack/PhD_Code/blob/1f28de20472986f3b3fcbe5e14deb61c937e6271/data_processing.dir/calc_natSST.py), file: [lsm_n96.nc](https://www.dropbox.com/s/xcedlrwozuyjhxv/lsm_n96.nc?dl=0)
 	>
-	> Rename the final SICE file (*OSTIA_SICE_N96_natural_landmask.nc*) to *final_OSTIA_SST_natural.nc*.
+	> Rename the final SICE file (*OSTIA_SICE_N96_natural_landmask.nc*) to *final_OSTIA_SICE_natural.nc*.
 	> 
 	> Operation: `python ~/Documents/University.dir/PhD.dir/Code.dir/data_processing.dir/calc_natSST.py -h`
 	>
